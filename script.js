@@ -4,6 +4,7 @@ const ratingCard = document.querySelector('.rating__card');
 const thanksCard = document.querySelector('.thanks__card');
 const resetBtn = document.querySelector('.reset__btn');
 const formList = document.querySelector('.form__list');
+const selected = document.querySelector('.selected');
 let score = 0;
 
 // clear state
@@ -29,10 +30,9 @@ function toggle(e) {
   e.target.classList.toggle('text-white');
 
   score = e.target.getAttribute('data-set');
-  //   console.log(score);
 }
 
-// openThanks
+// Open Thanks Card
 function openThanks() {
   ratingCard.classList.toggle('hidden');
   thanksCard.classList.toggle('hidden');
@@ -42,6 +42,7 @@ function openThanks() {
 function formListAddRing() {
   formList.classList.add('ring');
 }
+
 // formList Remove Ring
 function formListRemoveRing() {
   formList.classList.remove('ring');
@@ -53,6 +54,7 @@ function onSubmit(e) {
   if (score > 0) {
     console.log(score);
     openThanks();
+    selectedRes();
   } else if (score === 0) {
     formListAddRing();
   }
@@ -65,11 +67,15 @@ function resetRating() {
   score = 0;
 }
 
+// Selected Result content
+function selectedRes() {
+  selected.textContent = `You selected ${score} out of 5`;
+}
+
 // Form submission addEventListener with score
 form.addEventListener('submit', onSubmit);
 
 // AddEventListener
-
 numbers.forEach((item) => {
   item.addEventListener('click', function (listItem) {
     toggle(listItem);
